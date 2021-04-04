@@ -47,7 +47,6 @@ class CanvasTextEditor(tk.Text):
         tag = int(self.index(tk.INSERT)[:1])
         cur = self.get(f"{tag}.0", f"{int(tag) + 1}.0")
         line_format = r"(?P<object_type>oval) (?P<coords>\[[0-9. ,]*\]) (?P<fill_color>\#[0-9a-f]*) (?P<outline_color>\#[0-9a-f]*)"
-        #line_format = r"(?P<object_type>oval) (?P<coords>\[[0-9.]*\])"
         try:
             m = re.match(line_format, cur)
             if not m:
@@ -57,7 +56,6 @@ class CanvasTextEditor(tk.Text):
             self.master.canvas.itemconfig(tag, fill=fill_color, outline=outline_color)
             self.tag_delete(f"red{tag}.0{int(tag) + 1}.0")
         except Exception as e:
-            #print(e)
             self.tag_add(f"red{tag}.0{int(tag) + 1}.0", f"{tag}.0", f"{int(tag) + 1}.0")
             self.tag_configure(f"red{tag}.0{int(tag) + 1}.0", background="red")
 
